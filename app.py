@@ -27,7 +27,7 @@ def index():
 @app.route('/guncelle/<id>')
 def guncelle(id):
     #id değerinin ilk kaydı
-    yap=db.find({'_id':ObjectId(id)})
+    yap=db.find_one({'_id':ObjectId(id)})
     #true false yapalım
     durum= not yap.get('durum')
     #kaydı güncelle
@@ -39,11 +39,11 @@ def guncelle(id):
     #ana sayfa yönlendir
     return redirect('/')
 
-@app.route('/sil<id>')
+@app.route('/sil/<id>')
 def sil(id):
     #idsi gelen kaydı sil
     db.find_one_and_delete(
-        {'_id':ObjectId(id)},)
+        {'_id':ObjectId(id)})
     #ana sayfaya gönderecez
     return redirect('/')
 
